@@ -1,4 +1,5 @@
 from pickle import dump, load
+import os
 
 class Employee :
     def __init__(self) :
@@ -53,7 +54,7 @@ class Full(Employee) :
 
     def setBonus(self, bonus) :
         self.__bouns = bonus
-    def getContract(self) :
+    def getBonus(self) :
         return self.__bouns
 
 # 관리자
@@ -66,13 +67,18 @@ class Manager() :
 
 # 파일가져오기
 def pullDB() :
-    with open("databaseF.p","br") as fileF :
-        arrayF = load(fileF)
-    with open("databaseP.p","br") as fileP :
-        arrayP = load(fileP)
+    if os.path.getsize("databaseF.p") > 0 :
+        with open("databaseF.p","br") as fileF :
+            arrayF = load(fileF)
+    else :
+        arrayF = []
+    if os.path.getsize("databaseP.p") > 0 :
+        with open("databaseP.p","br") as fileP :
+            arrayP = load(fileP)
+    else :
+        arrayP = []
     print("데이터로딩 완료")
     return (arrayF, arrayP)
-
 
 # 파일입력하기
 def pushDB() :
