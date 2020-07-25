@@ -11,4 +11,6 @@ class Employee :
         self.__number = number
     def setName(self,name) :
         self.__name = name
+    def setRank(self,rank) :
+        self.__rank = rank
         
