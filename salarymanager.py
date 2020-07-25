@@ -1,11 +1,11 @@
 class Employee :
     def __init__(self) :
-        self.__number = "null"
-        self.__name = "null"
-        self.__rank = "null"
-        self.__birthday = "null"
-        self.__salary = "null"
-        self.__joinDate = "null"
+        self.__number = "null"   #사원번호
+        self.__name = "null"     #이름
+        self.__rank = "null"     #직급
+        self.__birthday = "null" #생일
+        self.__salary = "null"   #기본금
+        self.__joinDate = "null" #입사일
 
     def setNumber(self,number) :
         self.__number = number
@@ -31,3 +31,33 @@ class Employee :
         return self.__salary
     def getJoinDate(self) :
         return self.__joinDate
+
+# 비정규직
+class Part(Employee) :
+    def __init__(self) :
+        Employee.__init__(self)
+        self.__contract = "null"  #계약기간
+
+    def setContract(self, contract) :
+        self.__contract = contract
+    def getContract(self) :
+        return self.__contract
+
+# 정규직
+class Full(Employee) :
+    def __init__(self) :
+        Employee.__init__(self)
+        self.__bonus = "null"  #성과급
+
+    def setBonus(self, bonus) :
+        self.__bouns = bonus
+    def getContract(self) :
+        return self.__bouns
+
+# 관리자
+class Manager() :
+    full = []  #정규직사원들
+    part = []  #비정규직사원들
+    def __init__(self) :
+        pass
+    
