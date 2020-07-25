@@ -1,3 +1,5 @@
+from pickle import dump, load
+
 class Employee :
     def __init__(self) :
         self.__number = "null"   #사원번호
@@ -59,5 +61,32 @@ class Manager() :
     full = []  #정규직사원들
     part = []  #비정규직사원들
     def __init__(self) :
+        (Manager.full, Manager.part) = pullDB()
+
+
+# 파일가져오기
+def pullDB() :
+    with open("databaseF.p","br") as fileF :
+        arrayF = load(fileF)
+    with open("databaseP.p","br") as fileP :
+        arrayP = load(fileP)
+    print("데이터로딩 완료")
+    return (arrayF, arrayP)
+
+
+# 파일입력하기
+def pushDB() :
+    with open("databaseF.p","bw") as fileF :
+        dump(Manager.full, fileF)
+    with open("databaseP.p","bw") as fileP :
+        dump(Manager.part, fileP)
+    print("데이터입력완료")
+
+# 파일생성하기
+def mkDB() :
+    with open("databaseF.p","bw") as fileF :
         pass
-    
+    with open("databaseP.p","bw") as fileP :
+        pass
+
+
