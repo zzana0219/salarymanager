@@ -115,7 +115,7 @@ class Manager() :
         output = outputF + outputP
         if numberIn > 6 :       #보너스와 계약기간 변경
             for i in outputF :  #보너스 변경
-                i.setBouns(input("변경할 값을 입력하세요>"))
+                i.setBouns(int(input("변경할 값을 입력하세요>")))
                 pushDB(self)
             for i in outputP :  #계약기간변경
                 i.setContract(input("변경할 값을 입력하세요>"))
@@ -126,7 +126,7 @@ class Manager() :
                 pushDB(self)
         elif numberIn > 4 :     #기본급 변경
             for i in output :
-                i.setSalary(input("변경할 값을 입력하세요>"))
+                i.setSalary(int(input("변경할 값을 입력하세요>")))
                 pushDB(self)
         elif numberIn > 3 :     #생일 변경
             for i in output :
