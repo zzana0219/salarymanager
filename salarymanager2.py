@@ -18,22 +18,40 @@ login = login(m1)
 
 # 1. 사원모드
 if i == 1 :
-    outputF = m1.findFull(numberEm)
-    outputP = m1.findPart(numberEm)
-    if not outputF == [] :
-        print("사원번호", "이름", "직급", "생일", "기본급", "입사일", "보너스")
-        for i in outputF :
-            printF(i)
-            print("******세후 금액******")
-            print(i.monAfter())
-    elif not outputP == [] :
-        print("사원번호", "이름", "직급", "생일", "기본급", "입사일", "계약기간")
-        for i in outputP :
-            printP(i)
-            print("******세후 금액******")
-            print(i.monAfter())
-    else :
-        print("로그인이 잘못되었습니다.")
+    while True:
+        j = input("1.정보출력 2.비밀번호 변경 ")
+        if j == "1":
+            outputF = m1.findFull(numberEm)
+            outputP = m1.findPart(numberEm)
+            if not outputF == [] :
+                print("사원번호", "이름", "직급", "생일", "기본급", "입사일", "보너스")
+                for i in outputF :
+                    printF(i)
+                    print("******세후 금액******")
+                    print(i.monAfter())
+                break
+            elif not outputP == [] :
+                print("사원번호", "이름", "직급", "생일", "기본급", "입사일", "계약기간")
+                for i in outputP :
+                    printP(i)
+                    print("******세후 금액******")
+                    print(i.monAfter())
+                break
+            else :
+                print("로그인이 잘못되었습니다.")
+                break   
+        elif j == "2":
+            outputF = m1.findFull(numberEm)
+            outputP = m1.findPart(numberEm)
+            for i in outputF :
+                m1.modify_pw(numberEm)
+            for i in outputP :
+                m1.modify_pw(numberEm)
+            print("비밀번호가 변경되었습니다.")
+            break
+        else:
+            print("잘못된 입력입니다.")
+            continue
 
 # 2. 관리자모드
 elif i == 2 :
