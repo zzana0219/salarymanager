@@ -9,6 +9,7 @@ class Employee :
         self.__birthday = "null" #생일
         self.__salary = "null"   #기본금
         self.__joinDate = "null" #입사일
+        self.__passWord = "0000" #비밀번호
 
     def setNumber(self,number) :
         self.__number = number
@@ -22,6 +23,8 @@ class Employee :
         self.__salary = salary
     def setJoinDate(self, joinDate) :
         self.__joinDate = joinDate
+    def setPassWord(self, passWord) :
+        self.__passWord = passWord
     def getNumber(self) :
         return self.__number
     def getName(self) :
@@ -34,6 +37,8 @@ class Employee :
         return self.__salary
     def getJoinDate(self) :
         return self.__joinDate
+    def getPassWord(self) :
+        return self.__passWord
 
 # 비정규직
 class Part(Employee) :
@@ -45,6 +50,8 @@ class Part(Employee) :
         self.__contract = contract
     def getContract(self) :
         return self.__contract
+    def monAfter(self) :
+        return self.getSalary() * 0.85
 
 # 정규직
 class Full(Employee) :
@@ -56,6 +63,8 @@ class Full(Employee) :
         self.__bouns = bonus
     def getBonus(self) :
         return self.__bouns
+    def monAfter(self) :
+        return (self.getSalary() + self.getBonus()) * 0.85
 
 # 관리자
 class Manager() :
@@ -68,9 +77,9 @@ class Manager() :
         f.setName(input("이름을 입력해주요>"))
         f.setRank(input("직급을 입려해주요>"))
         f.setBirthday(input("생일을 입력해주세요>"))
-        f.setSalary(input("기본급을 입력해주세요>"))
+        f.setSalary(int(input("기본급을 입력해주세요>")))
         f.setJoinDate(input("입사일을 입력해주세요>"))
-        f.setBonus(input("보너스를 입력해주세요>"))
+        f.setBonus(int(input("보너스를 입력해주세요>")))
         self.__full.append(f)
         pushDB(self)        
     def setPart(self) :
@@ -79,10 +88,11 @@ class Manager() :
         p.setName(input("이름을 입력해주요>"))
         p.setRank(input("직급을 입려해주요>"))
         p.setBirthday(input("생일을 입력해주세요>"))
-        p.setSalary(input("기본급을 입력해주세요>"))
+        p.setSalary(int(input("기본급을 입력해주세요>")))
         p.setJoinDate(input("입사일을 입력해주세요>"))
         p.setContract(input("계약기간을 입력해주세요>"))
         self.__part.append(p)
+        pushDB(self)
     def getFull(self) :
         return self.__full
     def getPart(self) :
@@ -165,6 +175,21 @@ def pushDB(manager) :
         dump(manager.getPart(), fileP)
     print("데이터입력완료")
 
+# 로그인
+def login(m) :
+    while True :
+        numberEm = input("직원번호를 입력해주세요>")
+        passWord = input("비밀번호를 입려해주세요>")
+        if (numberEm  == "9999") and (passWord == "4321") :
+            return (2, "9999")
+        output = m.findFull(numberEm) + m.findPart(numberEm)
+        for i in output :
+            if i.getPassWord() == passWord :
+                print("로그인되었습니다.")
+                return (1, numberEm)
+            else :
+                print("잘못된정보입니다.")
+                continue
 
 # 프린트
 def printF(i) :
