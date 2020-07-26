@@ -13,35 +13,48 @@ if not (os.path.exists("databaseP.p")) :
 m1 = Manager()
 
 # 로그인
-# 관리자클래스에 로그인하는 로직을 넣어야 하나?
-while True:
-    i = int(input("사원? 관리자?"))
-    # 1. 사원모드
-    if i == 1 :
-        pass
+login = login(m1)
+(i, numberEm) = login
 
-    # 2. 관리자모드
-    elif i == 2 :
-        password = int(input("비밀번호? "))
-        if password == 1234:
-            pass
-        else:
-            print("비밀번호 오류")
-            continue
-        j = int(input("직원추가? 직원삭제? 직원수정? 직원 출력? 직원검색?"))
+# 1. 사원모드
+if i == 1 :
+    outputF = m1.findFull(numberEm)
+    outputP = m1.findPart(numberEm)
+    if not outputF == [] :
+        print("사원번호", "이름", "직급", "생일", "기본급", "입사일", "보너스")
+        for i in outputF :
+            printF(i)
+            print("******세후 금액******")
+            print(i.monAfter())
+    elif not outputP == [] :
+        print("사원번호", "이름", "직급", "생일", "기본급", "입사일", "계약기간")
+        for i in outputP :
+            printP(i)
+            print("******세후 금액******")
+            print(i.monAfter())
+    else :
+        print("로그인이 잘못되었습니다.")
+
+# 2. 관리자모드
+elif i == 2 :
+    while True :
+        print("1.직원추가", "2.직원삭제", "3.직원수정", "4.전체직원출력", "5.직원검색", "6.나가기")
+        j = input("원하시는 작업을 선택해주세요>")
         # 2-1.직원추가
-        if j == 1 :
-            k = int(input("정직원? 계약직?"))
+        if j == "1" :
+            print("1.정직원추가", "2.계약직직원추가")
+            k = input("원하시는 작업을 선택해주세요>")
             # 2-1-1. 정직원추가
-            if k == 1 :
+            if k == "1" :
                 m1.setFull()
-                continue
             # 2-1-2. 계약직직원추가
-            if k == 2 :
+            elif k == "2" :
                 m1.setPart()
-                continue
+            else :
+                print("잘못된입력입니다")
+            continue
         # 2-2.직원삭제
-        elif j == 2 :
+        elif j == "2" :
             numberEm = input("삭제하려는 직원번호를 입력해주세요>")
             outputF = m1.findFull(numberEm)
             outputP = m1.findPart(numberEm)
@@ -53,13 +66,13 @@ while True:
                 printP(i)
             i = input("정말 지우시겠습니까?(Y/N)>")
             if i in ["Y", "y"] :
-                m1.deleteEm(numberEm)
+                for i in numberEm :
+                    m1.deleteEm(i)
             else :
                 print("삭제하지 않았습니다.")
-
-
+            continue
         # 2-3.직원수정
-        elif j == 3 :
+        elif j == "3" :
             numberEm = input("수정하려는 직원번호를 입력해주세요>")
             outputF = m1.findFull(numberEm)
             outputP = m1.findPart(numberEm)
@@ -73,26 +86,24 @@ while True:
                 numberIn = int(input("번호를 입력해주세요.>"))
                 m1.modify(numberEm, numberIn)
             for i in outputP :
-                print("1.사원번호\n2.이름\2n3.직급\n4.생일\n5.기본급\n6.입사일\n7.계약기간")
+                print("1.사원번호\n2.이름\n3.직급\n4.생일\n5.기본급\n6.입사일\n7.계약기간")
                 numberIn = int(input("번호를 입력해주세요.>"))
                 m1.modify(numberEm, numberIn)
             continue
         # 2-4.전체직원 출력
-        elif j == 4 :
+        elif j == "4" :
             print("전체직원을 출력합니다.")
-            arrayF = m1.getFull()
-            arrayP = m1.getPart()
+            outputF = m1.getFull()
+            outputP = m1.getPart()
             print("******정직원******")
-            for i in arrayF :
-                print(i.getNumber(), i.getName(), i.getRank(),\
-                    i.getBirthday(), i.getSalary(), i.getJoinDate(), i.getBonus())
+            for i in outputF :
+                printF(i)
             print("******계약직******")
-            for i in arrayP :
-                print(i.getNumber(), i.getName(), i.getRank(),\
-                    i.getBirthday(), i.getSalary(), i.getJoinDate(), i.getContract())
+            for i in outputP :
+                printP(i)
             continue
         # 2-5. 직원검색
-        elif j == 5 :
+        elif j == "5" :
             number = input("검색하려는 직원번호를 입력해주세요>")
             outputF = m1.findFull(number)
             outputP = m1.findPart(number)
@@ -100,6 +111,13 @@ while True:
                 printF(i)
             for i in outputP :
                 printP(i)
-
-    else :
-        print("로그인이 잘못되었습니다.")
+            continue
+        # 2-6. 나가기
+        elif j == "6" :
+            break
+        else :
+            print("잘못된 입력입니다.")
+            continue
+        
+else :
+    print("로그인이 잘못되었습니다.")
