@@ -23,7 +23,7 @@ class Employee :
     def setJoinDate(self, joinDate) :
         self.__joinDate = joinDate
     def getNumber(self) :
-        return self.number
+        return self.__number
     def getName(self) :
         return self.__name
     def getRank(self) :
@@ -74,7 +74,15 @@ class Manager() :
         self.__full.append(f)
         pushDB(self)        
     def setPart(self) :
-        self.__part = part
+        p = Part()
+        p.setNumber(input("사원번호를 입력해주요>"))
+        p.setName(input("이름을 입력해주요>"))
+        p.setRank(input("직급을 입려해주요>"))
+        p.setBirthday(input("생일을 입력해주세요>"))
+        p.setSalary(input("기본급을 입력해주세요>"))
+        p.setJoinDate(input("입사일을 입력해주세요>"))
+        p.setContract(input("계약기간을 입력해주세요>"))
+        self.__part.append(f)
     def getFull(self) :
         return self.__full
     def getPart(self) :
