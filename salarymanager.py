@@ -82,7 +82,7 @@ class Manager() :
         p.setSalary(input("기본급을 입력해주세요>"))
         p.setJoinDate(input("입사일을 입력해주세요>"))
         p.setContract(input("계약기간을 입력해주세요>"))
-        self.__part.append(f)
+        self.__part.append()
     def getFull(self) :
         return self.__full
     def getPart(self) :
