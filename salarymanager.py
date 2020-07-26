@@ -59,10 +59,26 @@ class Full(Employee) :
 
 # 관리자
 class Manager() :
-    full = []  #정규직사원들
-    part = []  #비정규직사원들
     def __init__(self) :
-        (Manager.full, Manager.part) = pullDB()
+        (self.__full, self.__part) = pullDB() #사원이 없다면 ([],[])
+
+    def setFull(self) :
+        f = Full()
+        f.setNumber(input("사원번호를 입력해주요>"))
+        f.setName(input("이름을 입력해주요>"))
+        f.setRank(input("직급을 입려해주요>"))
+        f.setBirthday(input("생일을 입력해주세요>"))
+        f.setSalary(input("기본급을 입력해주세요>"))
+        f.setJoinDate(input("입사일을 입력해주세요>"))
+        f.setBonus(input("보너스를 입력해주세요>"))
+        self.__full.append(f)
+        pushDB(self)        
+    def setPart(self) :
+        self.__part = part
+    def getFull(self) :
+        return self.__full
+    def getPart(self) :
+        return self.__part
 
 
 # 파일가져오기
@@ -81,11 +97,12 @@ def pullDB() :
     return (arrayF, arrayP)
 
 # 파일입력하기
-def pushDB() :
+def pushDB(manager) :
+    print(manager.getFull())
     with open("databaseF.p","bw") as fileF :
-        dump(Manager.full, fileF)
+        dump(manager.getFull(), fileF)
     with open("databaseP.p","bw") as fileP :
-        dump(Manager.part, fileP)
+        dump(manager.getPart(), fileP)
     print("데이터입력완료")
 
 # 파일생성하기
