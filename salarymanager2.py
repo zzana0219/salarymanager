@@ -42,16 +42,20 @@ elif i == 2 :
         j = input("원하시는 작업을 선택해주세요>")
         # 2-1.직원추가
         if j == "1" :
-            print("1.정직원추가", "2.계약직직원추가")
-            k = input("원하시는 작업을 선택해주세요>")
-            # 2-1-1. 정직원추가
-            if k == "1" :
-                m1.setFull()
-            # 2-1-2. 계약직직원추가
-            elif k == "2" :
-                m1.setPart()
-            else :
-                print("잘못된입력입니다")
+            while True :
+                print("1.정직원추가", "2.계약직직원추가", "3.돌아가기")
+                k = input("원하시는 작업을 선택해주세요>")
+                # 2-1-1. 정직원추가
+                if k == "1" :
+                    m1.setFull()
+                # 2-1-2. 계약직직원추가
+                elif k == "2" :
+                    m1.setPart()
+                elif k == "3" :
+                    break
+                else :
+                    print("잘못된입력입니다")
+                    continue
             continue
         # 2-2.직원삭제
         elif j == "2" :
@@ -121,3 +125,4 @@ elif i == 2 :
         
 else :
     print("로그인이 잘못되었습니다.")
+
