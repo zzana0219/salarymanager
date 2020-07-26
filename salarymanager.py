@@ -82,7 +82,7 @@ class Manager() :
         p.setSalary(input("기본급을 입력해주세요>"))
         p.setJoinDate(input("입사일을 입력해주세요>"))
         p.setContract(input("계약기간을 입력해주세요>"))
-        self.__part.append()
+        self.__part.append(p)
     def getFull(self) :
         return self.__full
     def getPart(self) :
@@ -138,9 +138,8 @@ class Manager() :
         else :
             print("잘못된 입력입니다.")
     def deleteEm(self, numberEm) :
-        self._full = [i for i in getFull() if i.getNumber() != numberEm]
-        self._part = [i for i in getPart() if i.getNumber() != numberEm]
-        print(getFull(), getPart())
+        self.__full = [i for i in self.getFull() if (i.getNumber() != numberEm)]
+        self.__part = [i for i in self.getPart() if (i.getNumber() != numberEm)]
         pushDB(self)
 
 # 파일가져오기
