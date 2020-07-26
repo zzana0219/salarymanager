@@ -1,7 +1,13 @@
 from salarymanager import *
+import os
 
 # 파일생성하기
-mkDB()
+if os.path.getsize("databaseF.p") < 0 :
+    with open("databaseF.p","bw") as fileF :
+        pass
+if os.path.getsize("databaseP.p") < 0 :
+    with open("databaseP.p","bw") as fileP :
+        pass
 
 # 매니저객체 생성
 m1 = Manager()
