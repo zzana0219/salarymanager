@@ -73,24 +73,32 @@ class Manager() :
 
     def setFull(self) :
         f = Full()
-        f.setNumber(input("사원번호를 입력해주요>"))
-        f.setName(input("이름을 입력해주요>"))
-        f.setRank(input("직급을 입려해주요>"))
-        f.setBirthday(input("생일을 입력해주세요>"))
-        f.setSalary(int(input("기본급을 입력해주세요>")))
-        f.setJoinDate(input("입사일을 입력해주세요>"))
-        f.setBonus(int(input("보너스를 입력해주세요>")))
+        try :
+            f.setNumber(input("사원번호를 입력해주요>"))
+            f.setName(input("이름을 입력해주요>"))
+            f.setRank(input("직급을 입려해주요>"))
+            f.setBirthday(input("생일을 입력해주세요>"))
+            f.setSalary(int(input("기본급을 입력해주세요>")))
+            f.setJoinDate(input("입사일을 입력해주세요>"))
+            f.setBonus(int(input("보너스를 입력해주세요>")))
+        except :
+            print("잘못된 값을 입력하셨습니다.")
+            exit
         self.__full.append(f)
         pushDB(self)        
     def setPart(self) :
         p = Part()
-        p.setNumber(input("사원번호를 입력해주요>"))
-        p.setName(input("이름을 입력해주요>"))
-        p.setRank(input("직급을 입려해주요>"))
-        p.setBirthday(input("생일을 입력해주세요>"))
-        p.setSalary(int(input("기본급을 입력해주세요>")))
-        p.setJoinDate(input("입사일을 입력해주세요>"))
-        p.setContract(input("계약기간을 입력해주세요>"))
+        try :
+            p.setNumber(input("사원번호를 입력해주요>"))
+            p.setName(input("이름을 입력해주요>"))
+            p.setRank(input("직급을 입려해주요>"))
+            p.setBirthday(input("생일을 입력해주세요>"))
+            p.setSalary(int(input("기본급을 입력해주세요>")))
+            p.setJoinDate(input("입사일을 입력해주세요>"))
+            p.setContract(input("계약기간을 입력해주세요>"))
+        except :
+            print("잘못된 값을 입력하셨습니다.")
+            exit
         self.__part.append(p)
         pushDB(self)
     def getFull(self) :
@@ -113,38 +121,42 @@ class Manager() :
         outputF = self.findFull(numberEm)
         outputP = self.findPart(numberEm)
         output = outputF + outputP
-        if numberIn > 6 :       #보너스와 계약기간 변경
-            for i in outputF :  #보너스 변경
-                i.setBouns(int(input("변경할 값을 입력하세요>")))
-                pushDB(self)
-            for i in outputP :  #계약기간변경
-                i.setContract(input("변경할 값을 입력하세요>"))
-                pushDB(self)
-        elif numberIn > 5 :     #입사일 변경
-            for i in output :
-                i.setJoinDate(input("변경할 값을 입력하세요>"))
-                pushDB(self)
-        elif numberIn > 4 :     #기본급 변경
-            for i in output :
-                i.setSalary(int(input("변경할 값을 입력하세요>")))
-                pushDB(self)
-        elif numberIn > 3 :     #생일 변경
-            for i in output :
-                i.setBirthday(input("변경할 값을 입력하세요>"))
-                pushDB(self)
-        elif numberIn > 2 :     #직급 변경
-            for i in output :
-                i.setRank(input("변경할 값을 입력하세요>"))
-                pushDB(self)
-        elif numberIn > 1 :     #이름 변경
-            for i in output :
-                i.setName(input("변경할 값을 입력하세요>"))
-                pushDB(self)
-        elif numberIn > 0 :     #사원번호 변경
-            for i in output :
-                print("***경고 : 사원번호를 신중하게 변경하세요.***")
-                i.setNumber(input("변경할 값을 입력하세요>"))
-                pushDB(self)
+        try :
+            if numberIn > 6 :       #보너스와 계약기간 변경
+                for i in outputF :  #보너스 변경
+                    i.setBouns(int(input("변경할 값을 입력하세요>")))
+                    pushDB(self)
+                for i in outputP :  #계약기간변경
+                    i.setContract(input("변경할 값을 입력하세요>"))
+                    pushDB(self)
+            elif numberIn > 5 :     #입사일 변경
+                for i in output :
+                    i.setJoinDate(input("변경할 값을 입력하세요>"))
+                    pushDB(self)
+            elif numberIn > 4 :     #기본급 변경
+                for i in output :
+                    i.setSalary(int(input("변경할 값을 입력하세요>")))
+                    pushDB(self)
+            elif numberIn > 3 :     #생일 변경
+                for i in output :
+                    i.setBirthday(input("변경할 값을 입력하세요>"))
+                    pushDB(self)
+            elif numberIn > 2 :     #직급 변경
+                for i in output :
+                    i.setRank(input("변경할 값을 입력하세요>"))
+                    pushDB(self)
+            elif numberIn > 1 :     #이름 변경
+                for i in output :
+                    i.setName(input("변경할 값을 입력하세요>"))
+                    pushDB(self)
+            elif numberIn > 0 :     #사원번호 변경
+                for i in output :
+                    print("***경고 : 사원번호를 신중하게 변경하세요.***")
+                    i.setNumber(input("변경할 값을 입력하세요>"))
+                    pushDB(self)
+        except :
+            print("잘못된 값을 입력하셨습니다.")
+            exit
         else :
             print("잘못된 입력입니다.")
     def deleteEm(self, numberEm) :
