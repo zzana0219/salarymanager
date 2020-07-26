@@ -98,18 +98,8 @@ def pullDB() :
 
 # 파일입력하기
 def pushDB(manager) :
-    print(manager.getFull())
     with open("databaseF.p","bw") as fileF :
         dump(manager.getFull(), fileF)
     with open("databaseP.p","bw") as fileP :
         dump(manager.getPart(), fileP)
     print("데이터입력완료")
-
-# 파일생성하기
-def mkDB() :
-    with open("databaseF.p","bw") as fileF :
-        pass
-    with open("databaseP.p","bw") as fileP :
-        pass
-
-
