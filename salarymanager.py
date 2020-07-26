@@ -87,7 +87,61 @@ class Manager() :
         return self.__full
     def getPart(self) :
         return self.__part
-
+    def findFull(self, number) :
+        outputF = []
+        for j in self.__full :
+            if j.getNumber() == number :
+                outputF.append(j)
+        return outputF
+    def findPart(self, number) :
+        outputP = []
+        for j in self.__part :
+            if j.getNumber() == number :
+                outputP.append(j)
+        return outputP
+    def modify(self, numberEm, numberIn) :
+        outputF = self.findFull(numberEm)
+        outputP = self.findPart(numberEm)
+        output = outputF + outputP
+        if numberIn > 6 :       #보너스와 계약기간 변경
+            for i in outputF :  #보너스 변경
+                i.setBouns(input("변경할 값을 입력하세요>"))
+                pushDB(self)
+            for i in outputP :  #계약기간변경
+                i.setContract(input("변경할 값을 입력하세요>"))
+                pushDB(self)
+        elif numberIn > 5 :     #입사일 변경
+            for i in output :
+                i.setJoinDate(input("변경할 값을 입력하세요>"))
+                pushDB(self)
+        elif numberIn > 4 :     #기본급 변경
+            for i in output :
+                i.setSalary(input("변경할 값을 입력하세요>"))
+                pushDB(self)
+        elif numberIn > 3 :     #생일 변경
+            for i in output :
+                i.setBirthday(input("변경할 값을 입력하세요>"))
+                pushDB(self)
+        elif numberIn > 2 :     #직급 변경
+            for i in output :
+                i.setRank(input("변경할 값을 입력하세요>"))
+                pushDB(self)
+        elif numberIn > 1 :     #이름 변경
+            for i in output :
+                i.setName(input("변경할 값을 입력하세요>"))
+                pushDB(self)
+        elif numberIn > 0 :     #사원번호 변경
+            for i in output :
+                print("***경고 : 사원번호를 신중하게 변경하세요.***")
+                i.setNumber(input("변경할 값을 입력하세요>"))
+                pushDB(self)
+        else :
+            print("잘못된 입력입니다.")
+    def deleteEm(self, numberEm) :
+        self._full = [i for i in getFull() if i.getNumber() != numberEm]
+        self._part = [i for i in getPart() if i.getNumber() != numberEm]
+        print(getFull(), getPart())
+        pushDB(self)
 
 # 파일가져오기
 def pullDB() :
@@ -111,3 +165,12 @@ def pushDB(manager) :
     with open("databaseP.p","bw") as fileP :
         dump(manager.getPart(), fileP)
     print("데이터입력완료")
+
+
+# 프린트
+def printF(i) :
+    print(i.getNumber(), i.getName(), i.getRank(),\
+                  i.getBirthday(), i.getSalary(), i.getJoinDate(), i.getBonus())
+def printP(i) :
+    print(i.getNumber(), i.getName(), i.getRank(),\
+                  i.getBirthday(), i.getSalary(), i.getJoinDate(), i.getContract())
